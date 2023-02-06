@@ -51,7 +51,6 @@ export function Formulario({
       setAlerta([0, "Hay campos vacíos"]);
       return;
     } else {
-      setAlerta([1, "Paciente agregado"]);
 
       const objetoPaciente = {
         nombre,
@@ -68,6 +67,7 @@ export function Formulario({
           pacienteMap.id === paciente.id ? objetoPaciente : pacienteMap
         );
         setPacientes(pacientesActualizados);
+        setAlerta([1, "Datos del paciente editados"]);
         localStorage.setItem(
           "pacientes",
           JSON.stringify(pacientesActualizados)
@@ -77,6 +77,7 @@ export function Formulario({
         objetoPaciente.id = generarId();
         const pacientesActualizados = [...pacientes, objetoPaciente];
         setPacientes(pacientesActualizados);
+        setAlerta([1, "Paciente agregado"]);
         localStorage.setItem(
           "pacientes",
           JSON.stringify(pacientesActualizados)
@@ -97,7 +98,9 @@ export function Formulario({
         className="text-start rounded-md shadow-md bg-white p-5 mb-10"
       >
         {/* ERROR */}
-        {alerta && <Alerta tipo={alerta[0]} texto={alerta[1]} />}
+        {alerta && (
+          <Alerta tipo={alerta[0]} texto={alerta[1]} setAlerta={setAlerta} />
+        )}
         {/* CAMPOS */}
         <div>
           <label
@@ -188,7 +191,11 @@ export function Formulario({
             className="mt-5 rounded-md uppercase bg-indigo-500 text-white font-bold p-2 w-full hover:cursor-pointer hover:bg-indigo-700 transition-colors"
           />
           {paciente.id ? (
-            <button type="button" className="mt-5 bg-red-400 p-2 ml-2 rounded hover:bg-red-600" onClick={()=>vaciarPacienteEditable()}>
+            <button
+              type="button"
+              className="mt-5 bg-red-400 p-2 ml-2 rounded hover:bg-red-600"
+              onClick={() => vaciarPacienteEditable()}
+            >
               <svg
                 class="h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"

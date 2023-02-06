@@ -1,7 +1,7 @@
-export function Alerta({ tipo, texto }) {
+export function Alerta({ tipo, texto, setAlerta }) {
   if (tipo === 0) {
     return (
-      <div role="alert">
+      <div role="alert" onMouseUp={() => setAlerta(false)}>
         <div className="bg-red-500 text-white font-bold rounded-t px-4 py-2">
           Error
         </div>
@@ -13,7 +13,7 @@ export function Alerta({ tipo, texto }) {
   } else {
     if (tipo === 1) {
       return (
-        <div role="alert">
+        <div role="alert" onMouseUp={() => setAlerta(false)}>
           <div className="bg-green-500 text-white font-bold rounded-t px-4 py-2">
             Enviado
           </div>
@@ -22,6 +22,8 @@ export function Alerta({ tipo, texto }) {
           </div>
         </div>
       );
+    } else {
+      return;
     }
   }
 }

@@ -9,17 +9,13 @@ function App() {
   const [paciente, setPaciente] = useState({});
   const [alerta, setAlerta] = useState(false);
 
-  useEffect(()=>{
-    setTimeout(()=>{
-      setAlerta(false)
-    },3000)
-  },[alerta])
 
   useEffect(() => {
     if (localStorage.getItem("pacientes")) {
       setPacientes(JSON.parse(localStorage.getItem("pacientes")));
     }
   }, []);
+
 
   function deletePaciente(paciente) {
     if (confirm("¿Deseas eliminar este registro?")) {
